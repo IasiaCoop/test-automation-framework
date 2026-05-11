@@ -19,10 +19,9 @@ public class BaseTest {
         }});
 
         driver = new ChromeDriver(options);
-        // Uncomment for headless execution in CI pipeline
-        // options.addArguments("--headless");
-        // options.addArguments("--no-sandbox");
-        // options.addArguments("--disable-dev-shm-usage");
+         options.addArguments("--headless");
+         options.addArguments("--no-sandbox");
+         options.addArguments("--disable-dev-shm-usage");
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
     }
