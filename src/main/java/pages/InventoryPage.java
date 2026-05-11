@@ -2,12 +2,16 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class InventoryPage {
-    private final  WebDriver driver;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
-
-    //Locator
+    //Locators
     private final By backpackAddButton = By.id("add-to-cart-sauce-labs-backpack");
     private final By cartBadge = By.className("shopping_cart_badge");
     private final By cartLink = By.className("shopping_cart_link");
@@ -15,23 +19,23 @@ public class InventoryPage {
 
     public InventoryPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public void addBackpackToCart() {
-        driver.findElement(backpackAddButton).click();
+        wait.until(ExpectedConditions.elementToBeClickable(backpackAddButton)).click();
     }
 
-    public String getCartCount(){
-        return driver.findElement(cartBadge).getText();
+    public String getCartCount() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(cartBadge)).getText();
     }
 
     public void goToCart() {
-        driver.findElement(cartLink).click();
+        wait.until(ExpectedConditions.elementToBeClickable(cartLink)).click();
     }
+
     public boolean isPageLoaded() {
-        return driver.findElement(productsTitle).getText().equals("Products");
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(productsTitle))
+                .getText().equals("Products");
     }
-
-
-
 }
