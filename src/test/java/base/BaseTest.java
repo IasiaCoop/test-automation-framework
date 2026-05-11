@@ -12,6 +12,9 @@ public class BaseTest {
     @BeforeMethod
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-notifications");
         options.setExperimentalOption("prefs", new java.util.HashMap<String, Object>() {{
             put("credentials_enable_service", false);
@@ -19,9 +22,6 @@ public class BaseTest {
         }});
 
         driver = new ChromeDriver(options);
-         options.addArguments("--headless");
-         options.addArguments("--no-sandbox");
-         options.addArguments("--disable-dev-shm-usage");
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
     }
