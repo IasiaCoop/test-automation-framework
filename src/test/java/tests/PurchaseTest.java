@@ -1,6 +1,8 @@
 package tests;
 
 import base.BaseTest;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
@@ -8,6 +10,8 @@ import pages.CheckoutPage;
 import pages.InventoryPage;
 import pages.LoginPage;
 import utils.TestData;
+
+import java.time.Duration;
 
 public class PurchaseTest extends BaseTest {
 
@@ -22,6 +26,8 @@ public class PurchaseTest extends BaseTest {
         inventory.addBackpackToCart();
         Assert.assertEquals(inventory.getCartCount(), "1", "Cart count should be 1!");
         inventory.goToCart();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlContains("cart.html"));
         CartPage cart = new CartPage(driver);
         cart.clickOnCheckoutButton();
         //Checkout
