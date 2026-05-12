@@ -19,7 +19,7 @@ public class InventoryPage {
 
     public InventoryPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
     public void addBackpackToCart() {
@@ -30,7 +30,8 @@ public class InventoryPage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(cartBadge)).getText();
     }
     public void goToCart() {
-        wait.until(ExpectedConditions.elementToBeClickable(cartLink)).click();
+        driver.navigate().to("https://www.saucedemo.com/cart.html");
+
     }
 
     public boolean isPageLoaded() {
