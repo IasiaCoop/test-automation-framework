@@ -33,7 +33,7 @@ public class CheckoutPage {
     }
 
     public void clickContinueButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(continueButton)).click();
+        driver.findElement(continueButton).click();
     }
 
     public void clickCancelButton() {
@@ -41,7 +41,7 @@ public class CheckoutPage {
     }
 
     public void clickFinishButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(finishButton)).click();
+        driver.findElement(finishButton).click();
     }
 
     public String getConfirmationMessage() {

@@ -16,6 +16,7 @@ public class BaseTest {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-notifications");
+        options.addArguments("--window-size=1920,1080");
         options.setExperimentalOption("prefs", new java.util.HashMap<String, Object>() {{
             put("credentials_enable_service", false);
             put("profile.password_manager_enabled", false);
