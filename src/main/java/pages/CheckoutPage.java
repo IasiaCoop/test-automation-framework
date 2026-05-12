@@ -44,7 +44,8 @@ public class CheckoutPage {
     }
 
     public void clickFinishButton() {
-        driver.findElement(finishButton).click();
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(finishButton));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
     }
 
     public String getConfirmationMessage() {
