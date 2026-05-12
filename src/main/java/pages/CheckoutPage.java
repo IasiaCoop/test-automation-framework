@@ -29,9 +29,17 @@ public class CheckoutPage {
 
 
     public void fillOutInformation(String firstName, String lastName, String postalCode) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameField)).sendKeys(firstName);
-        driver.findElement(lastNameField).sendKeys(lastName);
-        driver.findElement(postalCodeField).sendKeys(postalCode);
+        WebElement first = wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameField));
+        first.clear();
+        first.sendKeys(firstName);
+
+        WebElement last = wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameField));
+        last.clear();
+        last.sendKeys(lastName);
+
+        WebElement postal = wait.until(ExpectedConditions.visibilityOfElementLocated(postalCodeField));
+        postal.clear();
+        postal.sendKeys(postalCode);
     }
 
     public void clickContinueButton() {
