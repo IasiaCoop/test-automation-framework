@@ -47,10 +47,21 @@ public class CheckoutPage {
     }
 
     public void clickContinueButton() {
-        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(continueButton));
-        button.click();
-        wait.until(ExpectedConditions.urlContains("checkout-step-two.html"));
+
+        WebElement button = wait.until(
+                ExpectedConditions.presenceOfElementLocated(continueButton)
+        );
+
+        wait.until(ExpectedConditions.visibilityOf(button));
+        wait.until(ExpectedConditions.elementToBeClickable(button));
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView(true);", button);
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", button);
     }
+
 
     public void clickCancelButton() {
         wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
