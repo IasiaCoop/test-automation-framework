@@ -20,6 +20,7 @@ public class CheckoutPage {
     private final By cancelButton = By.id("cancel");
     private final By finishButton = By.id("finish");
     private final By confirmationMessage = By.cssSelector("[data-test='complete-header']");
+    private final By summaryInfo = By.className("summary_info");
 
 
     public CheckoutPage(WebDriver driver) {
@@ -44,20 +45,25 @@ public class CheckoutPage {
 
     public void clickContinueButton() {
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(continueButton));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+        button.click();
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(summaryInfo)
+        );
     }
 
     public void clickCancelButton() {
-        driver.findElement(cancelButton).click();
+        wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
     }
 
     public void clickFinishButton() {
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(finishButton));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", button);
+       button.click();
     }
 
     public String getConfirmationMessage() {
-        return driver.findElement(confirmationMessage).getText();
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(confirmationMessage)
+        ).getText();
 
     }
 
