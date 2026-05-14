@@ -31,14 +31,17 @@ public class CheckoutPage {
 
     public void fillOutInformation(String firstName, String lastName, String postalCode) {
         WebElement first = wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameField));
+        first.click();
         first.clear();
         first.sendKeys(firstName);
 
         WebElement last = wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameField));
+        last.click();
         last.clear();
         last.sendKeys(lastName);
 
         WebElement postal = wait.until(ExpectedConditions.visibilityOfElementLocated(postalCodeField));
+        postal.click();
         postal.clear();
         postal.sendKeys(postalCode);
     }
