@@ -46,9 +46,7 @@ public class CheckoutPage {
     public void clickContinueButton() {
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(continueButton));
         button.click();
-        wait.until(
-                ExpectedConditions.visibilityOfElementLocated(summaryInfo)
-        );
+        wait.until(ExpectedConditions.urlContains("checkout-step-two.html"));
     }
 
     public void clickCancelButton() {
