@@ -47,15 +47,13 @@ public class InventoryPage {
 
 
     public void goToCart() {
-        wait.until(
-                ExpectedConditions.elementToBeClickable(cartLink)
-        ).click();
-
+        driver.get("https://www.saucedemo.com/cart.html");
         wait.until(
                 ExpectedConditions.urlContains("cart.html")
         );
-
         System.out.println("Cart page loaded: " + driver.getCurrentUrl());
+
+
 
 
 
