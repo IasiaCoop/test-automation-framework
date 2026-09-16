@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -46,7 +47,14 @@ public class PurchaseTest extends BaseTest {
                     TestData.POSTAL_CODE
             );
 
+
             checkout.clickContinueButton();
+            if (!driver.findElements(By.cssSelector("[data-test='error']")).isEmpty()) {
+                    System.out.println(
+                            "CHECKOUT ERROR: " +
+                                    checkout.getErrorMessage()
+                    );
+            }
 
             wait.until(ExpectedConditions.urlContains("checkout-step-two.html"));
 

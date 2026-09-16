@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,19 +24,44 @@ public class InventoryPage {
     }
 
     public void addBackpackToCart() {
-        driver.findElement(backpackAddButton).click();
+
+        WebElement button = wait.until(
+                ExpectedConditions.elementToBeClickable(backpackAddButton)
+        );
+
+        button.click();
+
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(cartBadge)
+        );
     }
+
 
     public String getCartCount() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(cartBadge)).getText();
-    }
-    public void goToCart() {
-        driver.navigate().to("https://www.saucedemo.com/cart.html");
 
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(cartBadge)
+        ).getText();
     }
+
+
+    public void goToCart() {
+
+        wait.until(
+                ExpectedConditions.elementToBeClickable(cartLink)
+        ).click();
+    }
+
 
     public boolean isPageLoaded() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(productsTitle))
-                .getText().equals("Products");
+
+        WebElement title = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(productsTitle)
+        );
+
+        System.out.println("Page title found: " + title.getText());
+
+        return title.getText().equals("Products");
     }
 }
+

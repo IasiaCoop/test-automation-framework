@@ -21,6 +21,7 @@ public class CheckoutPage {
     private final By finishButton = By.id("finish");
     private final By confirmationMessage = By.cssSelector("[data-test='complete-header']");
     private final By summaryInfo = By.className("summary_info");
+    private final By errorMessage = By.cssSelector("[data-test='error']");
 
 
     public CheckoutPage(WebDriver driver) {
@@ -46,37 +47,44 @@ public class CheckoutPage {
         postal.sendKeys(postalCode);
     }
 
-    public void clickContinueButton() {
+        public void clickCancelButton() {
+            wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
+        }
 
-        WebElement button = wait.until(
-                ExpectedConditions.presenceOfElementLocated(continueButton)
-        );
 
-        wait.until(ExpectedConditions.visibilityOf(button));
-        wait.until(ExpectedConditions.elementToBeClickable(button));
+        public void clickContinueButton() {
+        //WebElement button = wait.until(
+                //ExpectedConditions.elementToBeClickable(continueButton)
+        //);
+       // button.click();
+            WebElement button = wait.until(
+                    ExpectedConditions.elementToBeClickable(continueButton)
+            );
 
-        ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView(true);", button);
+            System.out.println("Continue button found.");
 
-        ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].click();", button);
+            button.click();
+
+            System.out.println("Clicked Continue.");
+            System.out.println("Current URL after click: " + driver.getCurrentUrl());
     }
 
+        public void clickFinishButton() {
+            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(finishButton));
+            button.click();
+        }
 
-    public void clickCancelButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
-    }
-
-    public void clickFinishButton() {
-        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(finishButton));
-       button.click();
-    }
 
     public String getConfirmationMessage() {
         return wait.until(
                 ExpectedConditions.visibilityOfElementLocated(confirmationMessage)
         ).getText();
 
+    }
+    public String getErrorMessage() {
+        return wait.until(
+                ExpectedConditions.visibilityOfElementLocated(errorMessage)
+        ).getText();
     }
 
 
