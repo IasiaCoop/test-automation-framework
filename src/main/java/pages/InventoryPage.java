@@ -47,26 +47,18 @@ public class InventoryPage {
 
 
     public void goToCart() {
-        WebElement cart = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(cartLink)
+        wait.until(
+                ExpectedConditions.elementToBeClickable(cartLink)
+        ).click();
+
+        wait.until(
+                ExpectedConditions.urlContains("cart.html")
         );
-
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block: 'center'});",
-                cart
-        );
-
-        wait.until(ExpectedConditions.elementToBeClickable(cart));
-
-        System.out.println("Cart link found.");
-        System.out.println("Cart link displayed: " + cart.isDisplayed());
-        System.out.println("Cart link enabled: " + cart.isEnabled());
-
-        cart.click();
-
-        wait.until(ExpectedConditions.urlContains("cart.html"));
 
         System.out.println("Cart page loaded: " + driver.getCurrentUrl());
+
+
+
 
     }
 
