@@ -15,6 +15,7 @@ public class InventoryPage {
 
     //Locators
     private final By backpackAddButton = By.id("add-to-cart-sauce-labs-backpack");
+    private final By backpackRemoveButton = By.id("remove-sauce-labs-backpack");
     private final By cartBadge = By.className("shopping_cart_badge");
     private final By cartLink = By.className("shopping_cart_link");
     private final By productsTitle = By.cssSelector("[data-test='title']");
@@ -25,16 +26,21 @@ public class InventoryPage {
     }
 
     public void addBackpackToCart() {
-
         WebElement button = wait.until(
                 ExpectedConditions.elementToBeClickable(backpackAddButton)
         );
 
+        System.out.println("Backpack Add to Cart button found.");
+
         button.click();
 
         wait.until(
-                ExpectedConditions.visibilityOfElementLocated(cartBadge)
+                ExpectedConditions.visibilityOfElementLocated(backpackRemoveButton)
         );
+
+        System.out.println("Backpack successfully added to cart.");
+
+
     }
 
 

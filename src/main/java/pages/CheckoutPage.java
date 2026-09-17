@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -31,20 +28,28 @@ public class CheckoutPage {
 
 
     public void fillOutInformation(String firstName, String lastName, String postalCode) {
-        WebElement first = wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameField));
-        first.click();
+        WebElement first = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(firstNameField)
+        );
+
         first.clear();
         first.sendKeys(firstName);
 
-        WebElement last = wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameField));
-        last.click();
+        WebElement last = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(lastNameField)
+        );
+
         last.clear();
         last.sendKeys(lastName);
 
-        WebElement postal = wait.until(ExpectedConditions.visibilityOfElementLocated(postalCodeField));
-        postal.click();
+        WebElement postal = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(postalCodeField)
+        );
+
         postal.clear();
         postal.sendKeys(postalCode);
+
+
     }
 
         public void clickCancelButton() {
@@ -53,18 +58,8 @@ public class CheckoutPage {
 
 
         public void clickContinueButton() {
-
             WebElement button = wait.until(
                     ExpectedConditions.elementToBeClickable(continueButton)
-            );
-
-            System.out.println("Continue button found.");
-            System.out.println("Continue displayed: " + button.isDisplayed());
-            System.out.println("Continue enabled: " + button.isEnabled());
-
-            ((JavascriptExecutor) driver).executeScript(
-                    "arguments[0].scrollIntoView({block: 'center'});",
-                    button
             );
 
             ((JavascriptExecutor) driver).executeScript(
@@ -72,18 +67,34 @@ public class CheckoutPage {
                     button
             );
 
-            System.out.println("After Continue URL: " + driver.getCurrentUrl());
-
             wait.until(
                     ExpectedConditions.urlContains("checkout-step-two.html")
             );
 
-            System.out.println("Checkout Step 2 loaded.");;
+
+
+
     }
 
         public void clickFinishButton() {
-            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(finishButton));
-            button.click();
+            WebElement button = wait.until(
+                    ExpectedConditions.elementToBeClickable(finishButton)
+            );
+
+            System.out.println("Finish button found.");
+
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].click();",
+                    button
+            );
+
+            wait.until(
+                    ExpectedConditions.urlContains("checkout-complete.html")
+            );
+
+            System.out.println("Checkout complete.");
+
+
         }
 
 
@@ -97,6 +108,17 @@ public class CheckoutPage {
         return wait.until(
                 ExpectedConditions.visibilityOfElementLocated(errorMessage)
         ).getText();
+    }
+    public boolean isOrderSummaryDisplayed() {
+
+        WebElement summary = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(summaryInfo)
+        );
+
+        System.out.println("Order summary found.");
+        System.out.println("Order summary displayed: " + summary.isDisplayed());
+
+        return summary.isDisplayed();
     }
 
 

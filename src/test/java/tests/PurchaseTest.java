@@ -37,7 +37,7 @@ public class PurchaseTest extends BaseTest {
             CartPage cart = new CartPage(driver);
             cart.clickOnCheckoutButton();
 
-            //wait.until(ExpectedConditions.urlContains("checkout-step-one.html"));
+
 
             // Checkout
             CheckoutPage checkout = new CheckoutPage(driver);
@@ -57,6 +57,10 @@ public class PurchaseTest extends BaseTest {
             }
 
             wait.until(ExpectedConditions.urlContains("checkout-step-two.html"));
+            Assert.assertTrue(
+                    checkout.isOrderSummaryDisplayed(),
+                    "Order summary was not displayed."
+            );
 
             checkout.clickFinishButton();
 

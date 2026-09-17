@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.time.Duration;
+
 public class BaseTest {
     protected WebDriver driver;
 
@@ -26,7 +28,7 @@ public class BaseTest {
         }});
 
         driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.get("https://www.saucedemo.com/");
     }
 
