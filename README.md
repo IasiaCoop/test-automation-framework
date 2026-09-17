@@ -50,7 +50,6 @@ test-automation-framework/
 | **Java 19** | Primary language |
 | **Page Object Model** | Separates locators and actions from test logic |
 | **Maven** | Build and dependency management |
-| **GitHub Actions** | CI pipeline — runs tests on every push |
 
 ---
 
@@ -89,13 +88,6 @@ mvn clean test
 mvn clean test -Dtest=LoginTest
 mvn clean test -Dtest=PurchaseTest
 ```
-
----
-
-## CI/CD
-
-This project uses **GitHub Actions** to automatically run the
-full test suite on every push and pull request to main.
 
 ---
 
