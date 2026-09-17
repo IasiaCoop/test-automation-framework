@@ -53,20 +53,32 @@ public class CheckoutPage {
 
 
         public void clickContinueButton() {
-        //WebElement button = wait.until(
-                //ExpectedConditions.elementToBeClickable(continueButton)
-        //);
-       // button.click();
+
             WebElement button = wait.until(
                     ExpectedConditions.elementToBeClickable(continueButton)
             );
 
             System.out.println("Continue button found.");
+            System.out.println("Continue displayed: " + button.isDisplayed());
+            System.out.println("Continue enabled: " + button.isEnabled());
 
-            button.click();
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].scrollIntoView({block: 'center'});",
+                    button
+            );
 
-            System.out.println("Clicked Continue.");
-            System.out.println("Current URL after click: " + driver.getCurrentUrl());
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].click();",
+                    button
+            );
+
+            System.out.println("After Continue URL: " + driver.getCurrentUrl());
+
+            wait.until(
+                    ExpectedConditions.urlContains("checkout-step-two.html")
+            );
+
+            System.out.println("Checkout Step 2 loaded.");;
     }
 
         public void clickFinishButton() {

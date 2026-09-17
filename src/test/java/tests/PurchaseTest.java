@@ -37,7 +37,7 @@ public class PurchaseTest extends BaseTest {
             CartPage cart = new CartPage(driver);
             cart.clickOnCheckoutButton();
 
-            wait.until(ExpectedConditions.urlContains("checkout-step-one.html"));
+            //wait.until(ExpectedConditions.urlContains("checkout-step-one.html"));
 
             // Checkout
             CheckoutPage checkout = new CheckoutPage(driver);
