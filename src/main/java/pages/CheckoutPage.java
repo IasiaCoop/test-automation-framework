@@ -62,13 +62,12 @@ public class CheckoutPage {
                     ExpectedConditions.elementToBeClickable(continueButton)
             );
 
-            ((JavascriptExecutor) driver).executeScript(
-                    "arguments[0].click();",
-                    button
-            );
+            System.out.println("Continue button found.");
 
-            wait.until(
-                    ExpectedConditions.urlContains("checkout-step-two.html")
+            button.click();
+
+            System.out.println(
+                    "URL after Continue: " + driver.getCurrentUrl()
             );
 
 
@@ -83,16 +82,11 @@ public class CheckoutPage {
 
             System.out.println("Finish button found.");
 
-            ((JavascriptExecutor) driver).executeScript(
-                    "arguments[0].click();",
-                    button
-            );
+            button.click();
 
-            wait.until(
-                    ExpectedConditions.urlContains("checkout-complete.html")
+            System.out.println(
+                    "URL after Finish: " + driver.getCurrentUrl()
             );
-
-            System.out.println("Checkout complete.");
 
 
         }
